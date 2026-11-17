@@ -107,14 +107,14 @@ def ng(b,w,d,a,be,cs,ep):
   if a>=be:break
  return a
 def choose(fen,lc):
- b,w,cs,ep=parse(fen);bt,bm=-9e9,min(lc)
- for m in sorted(lg(b,w,cs,ep)):
-  u=F[m[0]%8]+str(m[0]//8+1)+F[m[1]%8]+str(m[1]//8+1)+m[2]
-  if u not in lc:continue
-  nb,nc,ne=mk(b,m,w,cs,ep)
-  v=-ng(nb,not w,3,-9e9,9e9,nc,ne)
-  if v>bt or(v==bt and u<bm):bt,bm=v,u
- return bm
+	 b,w,cs,ep=parse(fen);bt,bm=-9e9,min(lc)
+	 for m in sorted(lg(b,w,cs,ep)):
+	  u=F[m[0]%8]+str(m[0]//8+1)+F[m[1]%8]+str(m[1]//8+1)+m[2]
+	  if u not in lc:continue
+	  nb,nc,ne=mk(b,m,w,cs,ep)
+	  v=-ng(nb,not w,3,-9e9,-bt,nc,ne)
+	  if v>bt:bt,bm=v,u
+	 return bm
 while 1:
  g=post("/game",{})
  if g["status"]=="done":break
